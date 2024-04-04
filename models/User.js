@@ -21,7 +21,7 @@ User.init(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      //! unique: true, Removed to test error in creating new users.
       validate: {
         isEmail: true,
       },

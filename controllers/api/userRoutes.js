@@ -1,8 +1,7 @@
-//TODO: Copied and pasted from MVC activity 24
-
 const router = require("express").Router();
 const { User } = require("../../models");
 
+//! The following post route was copied from UT Coding Bootcamp, Module 14, Activity 24
 router.post("/login", async (req, res) => {
   try {
     // Find the user who matches the posted e-mail address
@@ -37,6 +36,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//! The following post route was copied from UT Coding Bootcamp, Module 14, Activity 24
 router.post("/logout", (req, res) => {
   if (req.session.logged_in) {
     // Remove the session variables
@@ -45,6 +45,22 @@ router.post("/logout", (req, res) => {
     });
   } else {
     res.status(404).end();
+  }
+});
+
+// This route creates a new user based on input from the signup form.
+router.post("/signup", async (req, res) => {
+  try {
+    const newUserData = await User.create(req.body);
+    /* req.body should look like this...
+        {
+          email: "xxx@gmail.com",
+          password: "password12345",
+        }
+    */
+    res.status(200).json(newUserData);
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 
