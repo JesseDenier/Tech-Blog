@@ -1,4 +1,4 @@
-// Copied and pasted
+//TODO: Copied and pasted from MVC activity 24
 
 const router = require("express").Router();
 const { User } = require("../models");
@@ -32,6 +32,11 @@ router.get("/login", (req, res) => {
   }
 
   res.render("login");
+});
+
+// This directs /signup to signup.handlebars.
+router.get("/signup", (req, res) => {
+  res.render("signup");
 });
 
 module.exports = router;
