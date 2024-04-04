@@ -1,24 +1,32 @@
 [
   {
     "user_id": 1,
-
-    "email": "sal@hotmail.com",
-    "password": "password12345"
+    "date": "2024-04-01T08:00:00Z",
+    "title": "First Post",
+    "content": "This is the content of the first post."
   },
   {
-    "email": "lernantino@gmail.com",
-    "password": "password12345"
+    "user_id": 2,
+    "date": "2024-04-02T10:30:00Z",
+    "title": "Second Post",
+    "content": "This is the content of the second post."
   },
   {
-    "email": "amiko2k20@aol.com",
-    "password": "password12345"
+    "user_id": 1,
+    "date": "2024-04-03T15:45:00Z",
+    "title": "Third Post",
+    "content": "This is the content of the third post."
   },
   {
-    "email": "jordan99@msn.com",
-    "password": "password12345"
+    "user_id": 3,
+    "date": "2024-04-04T12:00:00Z",
+    "title": "Fourth Post",
+    "content": "This is the content of the fourth post."
   },
   {
-    "email": "the_blake@yahoo.com",
-    "password": "password12345"
+    "user_id": 2,
+    "date": "2024-04-05T09:15:00Z",
+    "title": "Fifth Post",
+    "content": "This is the content of the fifth post."
   }
 ]
