@@ -1,4 +1,4 @@
-// Copied and pasted
+//TODO: Copied and pasted from MVC activity 24
 
 module.exports = {
   get_emoji: () => {

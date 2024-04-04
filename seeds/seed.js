@@ -1,4 +1,4 @@
-// Copied and pasted
+//TODO: Copied and pasted from MVC activity 24
 
 const sequelize = require("../config/connection");
 const { User } = require("../models");

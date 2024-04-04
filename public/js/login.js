@@ -1,4 +1,4 @@
-// Copied and pasted
+//TODO: Copied and pasted from MVC activity 24
 
 const loginFormHandler = async (event) => {
   // Stop the browser from submitting the form so we can do so with JavaScript

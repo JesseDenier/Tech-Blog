@@ -1,4 +1,4 @@
-// Copied and pasted
+//TODO: Copied and pasted from MVC activity 24
 
 const router = require("express").Router();
 const { User } = require("../../models");

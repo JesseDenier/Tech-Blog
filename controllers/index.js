@@ -1,4 +1,4 @@
-// Copied and pasted
+// This file builds all connections to the routes.
 
 const router = require("express").Router();
 

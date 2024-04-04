@@ -1,4 +1,4 @@
-// Copied and pasted
+//TODO: Copied and pasted from MVC activity 24
 
 const withAuth = (req, res, next) => {
   // If the user isn't logged in, redirect them to the login route

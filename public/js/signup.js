@@ -1,4 +1,4 @@
-// Copied and pasted
+//TODO: Change this from a copy of login to one that creates a new user.
 
 const signupFormHandler = async (event) => {
   // Stop the browser from submitting the form so we can do so with JavaScript
