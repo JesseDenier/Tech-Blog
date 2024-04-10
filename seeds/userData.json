@@ -1,22 +1,18 @@
 [
   {
-    "email": "sal@hotmail.com",
-    "password": "password12345"
+    "email": "bob@gmail.com",
+    "password": "password"
   },
   {
-    "email": "lernantino@gmail.com",
-    "password": "password12345"
+    "email": "tim@gmail.com",
+    "password": "password"
   },
   {
-    "email": "amiko2k20@aol.com",
-    "password": "password12345"
+    "email": "jesse@gmail.com",
+    "password": "password"
   },
   {
-    "email": "jordan99@msn.com",
-    "password": "password12345"
-  },
-  {
-    "email": "the_blake@yahoo.com",
-    "password": "password12345"
+    "email": "jon@gmail.com",
+    "password": "password"
   }
 ]

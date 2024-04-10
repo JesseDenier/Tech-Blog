@@ -1,21 +1,19 @@
-//TODO: Copied and pasted from MVC activity 24
-
 const router = require("express").Router();
 const { User } = require("../models");
 const withAuth = require("../utils/auth");
 
+//! Copied and pasted from MVC activity 24
 // Prevent non logged in users from viewing the homepage
 router.get("/", withAuth, async (req, res) => {
   try {
-    const userData = await User.findAll({
-      attributes: { exclude: ["password"] },
-      order: [["email", "ASC"]],
+    const postData = await Post.findAll({
+      order: [["date", "ASC"]],
     });
 
-    const users = userData.map((project) => project.get({ plain: true }));
+    const posts = postData.map((project) => project.get({ plain: true }));
 
     res.render("homepage", {
-      users,
+      posts,
       // Pass the logged in flag to the template
       logged_in: req.session.logged_in,
     });
@@ -24,13 +22,13 @@ router.get("/", withAuth, async (req, res) => {
   }
 });
 
+//! Copied and pasted from MVC activity 24
 router.get("/login", (req, res) => {
   // If a session exists, redirect the request to the homepage
   if (req.session.logged_in) {
     res.redirect("/");
     return;
   }
-
   res.render("login");
 });
 
