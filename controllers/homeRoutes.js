@@ -1,12 +1,14 @@
 const router = require("express").Router();
 const { User } = require("../models");
 const withAuth = require("../utils/auth");
+const path = require("path");
+const { Post } = require("../models");
 
-//! Copied and pasted from MVC activity 24
 // Prevent non logged in users from viewing the homepage
 router.get("/", withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
+      include: [{ model: User, attributes: ["email"] }],
       order: [["date", "ASC"]],
     });
 
