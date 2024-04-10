@@ -13,8 +13,8 @@ const exphbs = require("express-handlebars");
 // Imports the routes defined in the './controllers' file.
 const routes = require("./controllers");
 
-// Imports custom helper functions for handlebars.
-const helpers = require("./utils/helpers");
+// Imports the formatDate helper function.
+const { formatDate } = require("./utils/helpers");
 
 // Imports a custom Sequelize instance.
 const sequelize = require("./config/connection");
@@ -23,7 +23,11 @@ const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 // Creates an instance of 'express-handlebars' with custom helpers defined above.
-const hbs = exphbs.create({});
+const hbs = exphbs.create({
+  helpers: {
+    formatDate,
+  },
+});
 
 // Creates an Express application instance, and defines the port number.
 const app = express();
