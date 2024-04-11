@@ -25,7 +25,10 @@ router.get("/", async (req, res) => {
 // This directs /dashboard to dashboard.handlebars.
 // withAuth makes it so if the user isn't logged in then they are redirected to /login.
 router.get("/dashboard", withAuth, (req, res) => {
-  res.render("dashboard");
+  res.render("dashboard", {
+    // Passes the logged in flag to the template
+    logged_in: req.session.logged_in,
+  });
 });
 
 // This directs /login to login.handlebars.
