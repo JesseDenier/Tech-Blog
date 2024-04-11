@@ -4,19 +4,17 @@ const withAuth = require("../utils/auth");
 const path = require("path");
 const { Post } = require("../models");
 
-// Shows the homepage on load, and fills the homepage with all the posts.
+// This directs / to homepage.handlebars, and fetches all posts from the API.
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
       include: [{ model: User, attributes: ["email"] }],
       order: [["date", "ASC"]],
     });
-
     const posts = postData.map((project) => project.get({ plain: true }));
-
     res.render("homepage", {
       posts,
-      // Pass the logged in flag to the template
+      // Passes the logged in flag to the template
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -24,9 +22,15 @@ router.get("/", async (req, res) => {
   }
 });
 
-// This directs /login to login.handlebars unless they are logged in and then it directs them to the homepage above.
+// This directs /dashboard to dashboard.handlebars.
+// withAuth makes it so if the user isn't logged in then they are redirected to /login.
+router.get("/dashboard", withAuth, (req, res) => {
+  res.render("dashboard");
+});
+
+// This directs /login to login.handlebars.
 router.get("/login", (req, res) => {
-  // If a session exists, redirect the request to the homepage
+  // If a session exists, redirects the request to the homepage.
   if (req.session.logged_in) {
     res.redirect("/");
     return;
@@ -36,6 +40,11 @@ router.get("/login", (req, res) => {
 
 // This directs /signup to signup.handlebars.
 router.get("/signup", (req, res) => {
+  // If a session exists, redirects the request to the homepage.
+  if (req.session.logged_in) {
+    res.redirect("/");
+    return;
+  }
   res.render("signup");
 });
 
