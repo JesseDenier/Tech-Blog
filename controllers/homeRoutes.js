@@ -4,8 +4,8 @@ const withAuth = require("../utils/auth");
 const path = require("path");
 const { Post } = require("../models");
 
-// Prevent non logged in users from viewing the homepage
-router.get("/", withAuth, async (req, res) => {
+// Shows the homepage on load, and fills the homepage with all the posts.
+router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
       include: [{ model: User, attributes: ["email"] }],
@@ -24,7 +24,7 @@ router.get("/", withAuth, async (req, res) => {
   }
 });
 
-//! Copied and pasted from MVC activity 24
+// This directs /login to login.handlebars unless they are logged in and then it directs them to the homepage above.
 router.get("/login", (req, res) => {
   // If a session exists, redirect the request to the homepage
   if (req.session.logged_in) {
