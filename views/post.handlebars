@@ -10,29 +10,27 @@
       on
       {{formatDate chosenPost.date format="MM/DD/YYYY"}}</h2>
   </div>
-  <div class="px-4 py-4 bg-white">
+  <div class="p4 bg-white">
     <p>{{chosenPost.content}}</p>
+    {{! Display edit and delete buttons if the logged-in user is the author of the post }}
+    {{#if (eq chosenPost.user_id activeUserId)}}
+      <div class="flex justify-end h-7">
+        <a
+          href="/edit/{{chosenPost.id}}"
+          class="postEditBtn text-blue-500 hover:underline mr-2"
+          id="postEditBtn"
+        >Edit</a>
+        <form action="/delete/{{chosenPost.id}}" method="POST">
+          <button
+            type="submit"
+            class="postDeleteBtn text-red-500 hover:underline mr-2"
+            id="postDeleteBtn"
+          >Delete</button>
+        </form>
+      </div>
+    {{/if}}
   </div>
-  {{! Display edit and delete buttons if the logged-in user is the author of the post }}
-  {{#if (eq chosenPost.user_id activeUserId)}}
-    <div class="flex justify-end px-4 py-2">
-      <a
-        href="/edit/{{chosenPost.id}}"
-        class="text-blue-500 hover:underline mr-2"
-        id="postEditBtn"
-      >Edit</a>
-      <form action="/delete/{{chosenPost.id}}" method="POST">
-        <button
-          type="submit"
-          class="postDeleteBtn text-red-500 hover:underline"
-          id="postDeleteBtn"
-        >Delete</button>
-      </form>
-    </div>
-  {{/if}}
 </div>
-
-<!-- TODO: Add an edit and delete button for the post, but only have it shown if the post has the same user_id as the currently signed in user. -->
 
 {{#each chosenPost.Comments as |comment|}}
   <div

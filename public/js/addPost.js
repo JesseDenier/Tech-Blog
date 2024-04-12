@@ -23,8 +23,8 @@ const addPostHandler = async (event) => {
       console.log("Comment successfully added.");
       document.location.replace("/");
     } else {
-      console.log("Failed to add comment. Status code:", response.status);
-      alert("Failed to add comment");
+      console.log("Failed to add post. Status code:", response.status);
+      alert("Failed to add post");
     }
   }
 };

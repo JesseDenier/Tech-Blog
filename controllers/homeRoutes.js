@@ -71,7 +71,7 @@ router.get("/signup", (req, res) => {
 
 //! This has to be the laste homeRoute or else it overrides the routes under it and breaks the site.
 // This directs /post.Id to post.handlebars, and fetches the correct post from the API.
-router.get("/:postId", async (req, res) => {
+router.get("/:postId", withAuth, async (req, res) => {
   try {
     const activeUserId = req.session.user_id;
     console.log(activeUserId);
