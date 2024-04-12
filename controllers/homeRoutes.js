@@ -74,7 +74,6 @@ router.get("/signup", (req, res) => {
 router.get("/:postId", withAuth, async (req, res) => {
   try {
     const activeUserId = req.session.user_id;
-    console.log(activeUserId);
 
     const postId = req.params.postId; // Extract the postId parameter from the URL
     const postData = await Post.findOne({
