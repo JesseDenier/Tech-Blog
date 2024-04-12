@@ -14,21 +14,21 @@
     <p>{{chosenPost.content}}</p>
   </div>
   {{! Display edit and delete buttons if the logged-in user is the author of the post }}
-  {{#if logged_in}}
-    {{#if (eq chosenPost.user_id activeUserId)}}
-      <div class="flex justify-end px-4 py-2">
-        <a
-          href="/edit/{{chosenPost.id}}"
-          class="text-blue-500 hover:underline mr-2"
-        >Edit</a>
-        <form action="/delete/{{chosenPost.id}}" method="POST">
-          <button
-            type="submit"
-            class="text-red-500 hover:underline"
-          >Delete</button>
-        </form>
-      </div>
-    {{/if}}
+  {{#if (eq chosenPost.user_id activeUserId)}}
+    <div class="flex justify-end px-4 py-2">
+      <a
+        href="/edit/{{chosenPost.id}}"
+        class="text-blue-500 hover:underline mr-2"
+        id="postEditBtn"
+      >Edit</a>
+      <form action="/delete/{{chosenPost.id}}" method="POST">
+        <button
+          type="submit"
+          class="postDeleteBtn text-red-500 hover:underline"
+          id="postDeleteBtn"
+        >Delete</button>
+      </form>
+    </div>
   {{/if}}
 </div>
 
@@ -75,3 +75,4 @@
 </div>
 
 <script src="/js/addComment.js"></script>
+<script src="/js/deletePost.js"></script>

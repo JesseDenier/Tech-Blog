@@ -22,4 +22,20 @@ router.post("/addPost", async (req, res) => {
   }
 });
 
+// DELETE route for deleting a post by ID.
+router.delete("/deletePost", async (req, res) => {
+  try {
+    // Extract postId from the request body.
+    const { post_id } = req.body;
+    console.log(post_id);
+    // Delete the post from the database.
+    await Post.destroy({ where: { id: post_id } });
+    // Respond with a success or failure status.
+    return res.status(200).json({ message: "Post deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 module.exports = router;
