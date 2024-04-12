@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { User, Post, Comment } = require("../../models");
 
-// This route creates a new user based on input from the signup form, and logs them in
+// This route creates a new comment based on input from the user, which user is signed in, and the current date/
 router.post("/addComment", async (req, res) => {
   try {
     const newComment = {
