@@ -8,14 +8,47 @@
     <h2 class="font-light italic">Posted by
       {{{chosenPost.user.username}}}
       on
-      {{formatDate chosenPost.date format="MM/DD/YYYY"}}
-    </h2>
+      {{formatDate chosenPost.date format="MM/DD/YYYY"}}</h2>
   </div>
   <div class="px-4 py-4 bg-white">
     <p>{{chosenPost.content}}</p>
-    <div class="flex justify-end">
-      <button class="rounded ml-2 p-1 bg-gray-800 text-white">Comment</button>
-      <button class="rounded ml-2 p-1 bg-gray-800 text-white">Edit</button>
+  </div>
+</div>
+
+{{#each chosenPost.Comments as |comment|}}
+  <div
+    class="w-3/4 mx-auto my-4 bg-gray-100 shadow-lg rounded overflow-hidden border-gray-800 border"
+  >
+    <div
+      class="flex items-center justify-between px-4 py-2 bg-gray-800 text-white"
+    >
+      <h2 class="font-bold">{{comment.title}}</h2>
+      <h2 class="font-light italic">Posted by
+        {{comment.user.username}}
+        on
+        {{formatDate comment.date format="MM/DD/YYYY"}}</h2>
     </div>
+    <div class="px-4 py-4 bg-white">
+      <p>{{comment.content}}</p>
+    </div>
+  </div>
+{{/each}}
+
+<div
+  class="w-3/4 mx-auto my-4 bg-gray-100 shadow-lg rounded overflow-hidden border-gray-800 border"
+>
+  <div
+    class="px-4 py-2 bg-gray-800 text-white flex items-center justify-between"
+  >
+    <h2 class="font-bold">Add a Comment</h2>
+  </div>
+  <div class="px-4 py-4 bg-white">
+    <textarea
+      class="w-full h-20 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+      placeholder="Write your comment here..."
+    ></textarea>
+    <button
+      class="mt-2 rounded bg-gray-800 text-white px-4 py-2"
+    >Submit</button>
   </div>
 </div>
