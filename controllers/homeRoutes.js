@@ -1,22 +1,20 @@
-//TODO: Copied and pasted from MVC activity 24
-
 const router = require("express").Router();
 const { User } = require("../models");
 const withAuth = require("../utils/auth");
+const path = require("path");
+const { Post } = require("../models");
 
-// Prevent non logged in users from viewing the homepage
-router.get("/", withAuth, async (req, res) => {
+// This directs / to homepage.handlebars, and fetches all posts from the API.
+router.get("/", async (req, res) => {
   try {
-    const userData = await User.findAll({
-      attributes: { exclude: ["password"] },
-      order: [["email", "ASC"]],
+    const postData = await Post.findAll({
+      include: [{ model: User, attributes: ["username"] }],
+      order: [["date", "ASC"]],
     });
-
-    const users = userData.map((project) => project.get({ plain: true }));
-
+    const posts = postData.map((project) => project.get({ plain: true }));
     res.render("homepage", {
-      users,
-      // Pass the logged in flag to the template
+      posts,
+      // Passes the logged in flag to the template
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -24,18 +22,32 @@ router.get("/", withAuth, async (req, res) => {
   }
 });
 
+// This directs /dashboard to dashboard.handlebars.
+// withAuth makes it so if the user isn't logged in then they are redirected to /login.
+router.get("/dashboard", withAuth, (req, res) => {
+  res.render("dashboard", {
+    // Passes the logged in flag to the template
+    logged_in: req.session.logged_in,
+  });
+});
+
+// This directs /login to login.handlebars.
 router.get("/login", (req, res) => {
-  // If a session exists, redirect the request to the homepage
+  // If a session exists, redirects the request to the homepage.
   if (req.session.logged_in) {
     res.redirect("/");
     return;
   }
-
   res.render("login");
 });
 
 // This directs /signup to signup.handlebars.
 router.get("/signup", (req, res) => {
+  // If a session exists, redirects the request to the homepage.
+  if (req.session.logged_in) {
+    res.redirect("/");
+    return;
+  }
   res.render("signup");
 });
 

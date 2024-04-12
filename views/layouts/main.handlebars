@@ -1,12 +1,10 @@
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Registry</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-
   <body>
     <header
       class="flex justify-between items-center p-4 bg-gray-800 text-gray-200 w-full"
@@ -16,24 +14,28 @@
       </div>
       <nav class="space-x-4">
         <!-- Added space between buttons -->
-        <button class="btn">Home</button>
-        <button class="btn">Dashboard</button>
+        <a href="/"> <button class="btn">Home</button></a>
+        <a href="/dashboard"> <button class="btn">Dashboard</button></a>
         <!-- Only displays the logout button if the user is logged in. -->
         {{#if logged_in}}
           <button class="btn" id="logout">Logout</button>
         {{/if}}
+        <!-- Only displays the login button if the user is not logged in. -->
+        {{#unless logged_in}}
+          <a href="/login"> <button class="btn" id="login">Login</button></a>
+        {{/unless}}
       </nav>
     </header>
     <main>
       {{{body}}}
     </main>
-    <footer>
-    </footer>
-
     <!-- Only include the logout script if the user is logged in -->
     {{#if logged_in}}
       <script src="/js/logout.js"></script>
     {{/if}}
+    <!-- Only include the login script if the user is not logged in -->
+    {{#unless logged_in}}
+      <script src="/js/logout.js"></script>
+    {{/unless}}
   </body>
-
 </html>

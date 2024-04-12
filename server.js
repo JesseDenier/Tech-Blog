@@ -1,21 +1,33 @@
 // Imports the 'path' module, provides utilities for working with file paths.
 const path = require("path");
+
 // Imports the 'express' module, a web application framework.
 const express = require("express");
+
 // Imports the 'express-session' module, provides middleware for Express.
 const session = require("express-session");
+
 // Creates an instance of 'express-handlebars'.
 const exphbs = require("express-handlebars");
+
 // Imports the routes defined in the './controllers' file.
 const routes = require("./controllers");
-// Imports custom helper functions for handlebars.
-const helpers = require("./utils/helpers");
+
+// Imports the formatDate helper function.
+const { formatDate } = require("./utils/helpers");
+
 // Imports a custom Sequelize instance.
 const sequelize = require("./config/connection");
+
 // Create a new sequelize store using the express-session package.
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
+
 // Creates an instance of 'express-handlebars' with custom helpers defined above.
-const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({
+  helpers: {
+    formatDate,
+  },
+});
 
 // Creates an Express application instance, and defines the port number.
 const app = express();

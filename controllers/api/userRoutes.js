@@ -48,7 +48,7 @@ router.post("/logout", (req, res) => {
   }
 });
 
-// This route creates a new user based on input from the signup form.
+// This route creates a new user based on input from the signup form, and logs them in
 router.post("/signup", async (req, res) => {
   try {
     const newUserData = await User.create(req.body);
@@ -58,7 +58,16 @@ router.post("/signup", async (req, res) => {
           password: "password12345",
         }
     */
-    res.status(200).json(newUserData);
+    // Create session variables based on the logged in user
+    req.session.save(() => {
+      req.session.user_id = newUserData.id;
+      req.session.logged_in = true;
+
+      res.json({
+        user: newUserData,
+        message: "You are now logged in with a new account!",
+      });
+    });
   } catch (err) {
     res.status(400).json(err);
   }
