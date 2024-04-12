@@ -8,11 +8,11 @@ const { Comment } = require("../models");
 // This directs / to homepage.handlebars, and fetches all posts from the API.
 router.get("/", async (req, res) => {
   try {
-    const postData = await Post.findAll({
+    const allPostData = await Post.findAll({
       include: [{ model: User, attributes: ["username"] }],
       order: [["date", "ASC"]],
     });
-    const posts = postData.map((project) => project.get({ plain: true }));
+    const posts = allPostData.map((project) => project.get({ plain: true }));
     res.render("homepage", {
       posts,
       // Passes the logged in flag to the template
@@ -25,11 +25,28 @@ router.get("/", async (req, res) => {
 
 // This directs /dashboard to dashboard.handlebars.
 // withAuth makes it so if the user isn't logged in then they are redirected to /login.
-router.get("/dashboard", withAuth, (req, res) => {
-  res.render("dashboard", {
-    // Passes the logged in flag to the template
-    logged_in: req.session.logged_in,
-  });
+router.get("/dashboard", withAuth, async (req, res) => {
+  try {
+    // Get the user ID from the session
+    const userId = req.session.user_id;
+
+    // Fetch posts made by the user with the given ID
+    const userPostData = await Post.findAll({
+      where: { user_id: userId }, // Filter by user ID
+      include: [{ model: User, attributes: ["username"] }],
+      order: [["date", "ASC"]],
+    });
+
+    const posts = userPostData.map((project) => project.get({ plain: true }));
+
+    res.render("dashboard", {
+      posts,
+      // Passes the logged in flag to the template
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // This directs /login to login.handlebars.
