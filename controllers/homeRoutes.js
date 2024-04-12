@@ -22,6 +22,29 @@ router.get("/", async (req, res) => {
   }
 });
 
+// This directs /post.Id to post.handlebars, and fetches the correct post from the API.
+router.get("/:postId", async (req, res) => {
+  try {
+    const postId = req.params.postId; // Extract the postId parameter from the URL
+    const postData = await Post.findOne({
+      where: { id: postId }, // Filter posts based on postId
+      include: [{ model: User, attributes: ["username"] }],
+    });
+    if (!postData) {
+      // Handle case where post is not found
+      return res.status(404).json({ message: "Post not found" });
+    }
+    const chosenPost = postData.get({ plain: true });
+    res.render("post", {
+      chosenPost,
+      // Passes the logged in flag to the template
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // This directs /dashboard to dashboard.handlebars.
 // withAuth makes it so if the user isn't logged in then they are redirected to /login.
 router.get("/dashboard", withAuth, (req, res) => {
