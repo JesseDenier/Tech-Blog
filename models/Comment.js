@@ -7,7 +7,7 @@ class Comment extends Model {}
 
 Comment.init(
   {
-    // Auto incremented id for each transaction to be called by.
+    // Auto incremented id for each comment to be called by.
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -37,7 +37,7 @@ Comment.init(
       allownull: true,
     },
     content: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
   },

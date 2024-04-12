@@ -1,0 +1,76 @@
+<div
+  class="w-11/12 mx-auto my-4 bg-gray-100 shadow-lg rounded overflow-hidden border-gray-800 border"
+>
+  <div
+    class="flex items-center justify-between px-4 py-2 bg-gray-800 text-white"
+  >
+    <h2 class="font-bold">{{{chosenPost.title}}}</h2>
+    <h2 class="font-light italic">Posted by
+      {{{chosenPost.user.username}}}
+      on
+      {{formatDate chosenPost.date format="MM/DD/YYYY"}}</h2>
+  </div>
+  <div class="p4 bg-white">
+    <p>{{chosenPost.content}}</p>
+    {{! Display edit and delete buttons if the logged-in user is the author of the post }}
+    {{#if (eq chosenPost.user_id activeUserId)}}
+      <div class="flex justify-end h-7">
+        <a
+          href="/edit/{{chosenPost.id}}"
+          class="postEditBtn text-blue-500 hover:underline mr-2"
+          id="postEditBtn"
+        >Edit</a>
+        <form action="/delete/{{chosenPost.id}}" method="POST">
+          <button
+            type="submit"
+            class="postDeleteBtn text-red-500 hover:underline mr-2"
+            id="postDeleteBtn"
+          >Delete</button>
+        </form>
+      </div>
+    {{/if}}
+  </div>
+</div>
+
+{{#each chosenPost.Comments as |comment|}}
+  <div
+    class="w-3/4 mx-auto my-4 bg-gray-100 shadow-lg rounded overflow-hidden border-gray-800 border"
+  >
+    <div
+      class="flex items-center justify-between px-4 py-2 bg-gray-800 text-white"
+    >
+      <h2 class="font-bold">{{comment.title}}</h2>
+      <h2 class="font-light italic">Posted by
+        {{comment.user.username}}
+        on
+        {{formatDate comment.date format="MM/DD/YYYY"}}</h2>
+    </div>
+    <div class="px-4 py-4 bg-white">
+      <p>{{comment.content}}</p>
+    </div>
+  </div>
+{{/each}}
+
+<div
+  class="w-3/4 mx-auto my-4 bg-gray-100 shadow-lg rounded overflow-hidden border-gray-800 border"
+>
+  <div
+    class="px-4 py-2 bg-gray-800 text-white flex items-center justify-between"
+  >
+    <h2 class="font-bold">Add a Comment</h2>
+  </div>
+  <div class="px-4 py-4 bg-white">
+    <textarea
+      class="w-full h-20 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+      placeholder="Write your comment here..."
+      id="newCommentContentArea"
+    ></textarea>
+    <button
+      class="mt-2 rounded bg-gray-800 text-white px-4 py-2"
+      id="newCommentSubmitBtn"
+    >Submit</button>
+  </div>
+</div>
+
+<script src="/js/addComment.js"></script>
+<script src="/js/deletePost.js"></script>

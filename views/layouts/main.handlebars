@@ -2,16 +2,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Registry</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Tech Blog</title>
+    <link rel="stylesheet" href="../../public/css/style.css" />
   </head>
   <body>
     <header
       class="flex justify-between items-center p-4 bg-gray-800 text-gray-200 w-full"
     >
-      <div class="rounded bg-gray-200 p-2">
-        <h1 class="text-xl font-bold text-gray-800">Tech Blog</h1>
-      </div>
+      <a href="/">
+        <div class="rounded bg-gray-200 p-2">
+          <h1 class="text-xl font-bold text-gray-800">Tech Blog</h1>
+        </div>
+      </a>
       <nav class="space-x-4">
         <!-- Added space between buttons -->
         <a href="/"> <button class="btn">Home</button></a>
@@ -33,9 +35,5 @@
     {{#if logged_in}}
       <script src="/js/logout.js"></script>
     {{/if}}
-    <!-- Only include the login script if the user is not logged in -->
-    {{#unless logged_in}}
-      <script src="/js/logout.js"></script>
-    {{/unless}}
   </body>
 </html>

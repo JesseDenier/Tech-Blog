@@ -1,1 +1,49 @@
-<h2>DASHBOARD</h2>
+{{#each posts as |post|}}
+  <a href="/{{post.id}}">
+    <div
+      class="w-11/12 mx-auto my-4 bg-gray-100 shadow-lg rounded overflow-hidden border-gray-800 border"
+    >
+      <div
+        class="flex items-center justify-between px-4 py-2 bg-gray-800 text-white"
+      >
+        <h2 class="font-bold">{{{post.title}}}</h2>
+        <h2 class="font-light italic">Posted by
+          {{{post.user.username}}}
+          on
+          {{formatDate post.date format="MM/DD/YYYY"}}
+        </h2>
+      </div>
+      <div class="px-4 py-4 bg-white">
+        <p>{{post.content}}</p>
+      </div>
+    </div>
+  </a>
+{{/each}}
+
+<div
+  class="w-3/4 mx-auto my-4 bg-gray-100 shadow-lg rounded overflow-hidden border-gray-800 border"
+>
+  <div
+    class="px-4 py-2 bg-gray-800 text-white flex items-center justify-between"
+  >
+    <h2 class="font-bold">Add a Post</h2>
+  </div>
+  <div class="px-4 py-4 bg-white">
+    <textarea
+      class="w-full h-10 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+      placeholder="Write your post title here..."
+      id="newPostTitleArea"
+    ></textarea>
+    <textarea
+      class="w-full h-20 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+      placeholder="Write your post content here..."
+      id="newPostContentArea"
+    ></textarea>
+    <button
+      class="mt-2 rounded bg-gray-800 text-white px-4 py-2"
+      id="newPostSubmitBtn"
+    >Submit</button>
+  </div>
+</div>
+
+<script src="/js/addPost.js"></script>

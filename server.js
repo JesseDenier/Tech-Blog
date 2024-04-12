@@ -16,6 +16,9 @@ const routes = require("./controllers");
 // Imports the formatDate helper function.
 const { formatDate } = require("./utils/helpers");
 
+// Imports the eq helper function.
+const { eq } = require("./utils/helpers");
+
 // Imports a custom Sequelize instance.
 const sequelize = require("./config/connection");
 
@@ -26,6 +29,7 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const hbs = exphbs.create({
   helpers: {
     formatDate,
+    eq,
   },
 });
 
@@ -55,6 +59,18 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+
+//! This is necessary to edits the MIME type of my CSS file to work correctly.
+app.use(
+  "/public",
+  express.static("public", {
+    setHeaders: (res, path, stat) => {
+      if (path.endsWith(".css")) {
+        res.setHeader("Content-Type", "text/css");
+      }
+    },
+  })
+);
 
 // Mounts the routes defined in the './controllers' file to the Express application.
 app.use(routes);

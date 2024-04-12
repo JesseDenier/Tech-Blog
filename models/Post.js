@@ -6,7 +6,7 @@ class Post extends Model {}
 
 Post.init(
   {
-    // Auto incremented id for each transaction to be called by.
+    // Auto incremented id for each post to be called by.
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -31,7 +31,7 @@ Post.init(
       allowNull: false,
     },
     content: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
   },
