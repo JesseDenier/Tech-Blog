@@ -2,11 +2,14 @@
 const addCommentHandler = async (event) => {
   // Gather the data from the text area on the page, and the html tag.
   const content = document.querySelector("#newCommentContentArea").value.trim();
-  const postId = 1; //TODO: This should be set to be equal to the post_id of the page the user is on.
+
+  // Extract postId from the URL
+  const urlParts = window.location.pathname.split("/");
+  const postId = urlParts[urlParts.length - 1];
 
   const requestBody = {
     content: content,
-    post_id: postId,
+    post_id: postId, //! The postId is being found using the URL which is probably "hacky" and should be improved.
   };
 
   if (content && postId) {
