@@ -8,7 +8,7 @@ const { Post } = require("../models");
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
-      include: [{ model: User, attributes: ["email"] }],
+      include: [{ model: User, attributes: ["username"] }],
       order: [["date", "ASC"]],
     });
     const posts = postData.map((project) => project.get({ plain: true }));
