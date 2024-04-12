@@ -16,6 +16,9 @@ const routes = require("./controllers");
 // Imports the formatDate helper function.
 const { formatDate } = require("./utils/helpers");
 
+// Imports the eq helper function.
+const { eq } = require("./utils/helpers");
+
 // Imports a custom Sequelize instance.
 const sequelize = require("./config/connection");
 
@@ -26,6 +29,7 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const hbs = exphbs.create({
   helpers: {
     formatDate,
+    eq,
   },
 });
 

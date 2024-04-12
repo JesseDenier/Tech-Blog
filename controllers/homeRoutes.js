@@ -73,6 +73,9 @@ router.get("/signup", (req, res) => {
 // This directs /post.Id to post.handlebars, and fetches the correct post from the API.
 router.get("/:postId", async (req, res) => {
   try {
+    const activeUserId = req.session.user_id;
+    console.log(activeUserId);
+
     const postId = req.params.postId; // Extract the postId parameter from the URL
     const postData = await Post.findOne({
       where: { id: postId }, // Filter posts based on postId
@@ -94,9 +97,9 @@ router.get("/:postId", async (req, res) => {
     }
 
     const chosenPost = postData.get({ plain: true });
-    console.log(chosenPost); // Log the chosenPost object
     res.render("post", {
       chosenPost,
+      activeUserId,
       // Passes the logged in flag to the template
       logged_in: req.session.logged_in,
     });

@@ -10,6 +10,11 @@ function formatDate(date, format) {
   return [month, day, year].join("/");
 }
 
+function eq(x, y) {
+  return x === y;
+}
+
 module.exports = {
   formatDate,
+  eq,
 };

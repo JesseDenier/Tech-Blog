@@ -13,7 +13,26 @@
   <div class="px-4 py-4 bg-white">
     <p>{{chosenPost.content}}</p>
   </div>
+  {{! Display edit and delete buttons if the logged-in user is the author of the post }}
+  {{#if logged_in}}
+    {{#if (eq chosenPost.user_id activeUserId)}}
+      <div class="flex justify-end px-4 py-2">
+        <a
+          href="/edit/{{chosenPost.id}}"
+          class="text-blue-500 hover:underline mr-2"
+        >Edit</a>
+        <form action="/delete/{{chosenPost.id}}" method="POST">
+          <button
+            type="submit"
+            class="text-red-500 hover:underline"
+          >Delete</button>
+        </form>
+      </div>
+    {{/if}}
+  {{/if}}
 </div>
+
+<!-- TODO: Add an edit and delete button for the post, but only have it shown if the post has the same user_id as the currently signed in user. -->
 
 {{#each chosenPost.Comments as |comment|}}
   <div
