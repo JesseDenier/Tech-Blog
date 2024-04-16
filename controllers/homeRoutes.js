@@ -69,7 +69,30 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-//! This has to be the laste homeRoute or else it overrides the routes under it and breaks the site.
+// TODO: Add notation
+router.get("/editPost:postId", withAuth, async (req, res) => {
+  try {
+    const postId = req.params.postId; // Extract the postId parameter from the URL
+    const postData = await Post.findOne({
+      where: { id: postId }, // Filter posts based on postId
+    });
+    if (!postData) {
+      // Handle case where post is not found
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    const chosenPost = postData.get({ plain: true });
+    res.render("editPost", {
+      chosenPost,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    console.error(err); // Log the error
+    res.status(500).json({ error: "Internal Server Error" }); // Send a generic error response
+  }
+});
+
+//! This has to be the last homeRoute or else it overrides the routes under it and breaks the site.
 // This directs /post.Id to post.handlebars, and fetches the correct post from the API.
 router.get("/:postId", withAuth, async (req, res) => {
   try {
