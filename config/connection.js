@@ -1,5 +1,6 @@
 // This allows us to view, create, and manipulate SQL data through a server.
 const Sequelize = require("sequelize");
+
 // Allows private MySql info to be saved seperately, and referenced below.
 require("dotenv").config();
 
