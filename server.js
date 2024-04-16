@@ -40,7 +40,7 @@ const PORT = process.env.PORT || 3001;
 // Configures and links a session object with the sequelize store
 const sess = {
   secret: "Super secret secret",
-  cookie: {},
+  cookie: { maxAge: 120000 }, // if a user does nothing for 2 minutes their cookie will expire and they will need to login again.
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
