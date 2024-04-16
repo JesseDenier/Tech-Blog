@@ -4,7 +4,6 @@ const Sequelize = require("sequelize");
 require("dotenv").config();
 
 // A custom instance of Sequelize that has its own port along with personal login info.
-
 const sequelize = process.env.JAWSDB_URL
   ? new Sequelize(process.env.JAWSDB_URL)
   : new Sequelize(
