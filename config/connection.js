@@ -1,10 +1,10 @@
 // This allows us to view, create, and manipulate SQL data through a server.
 const Sequelize = require("sequelize");
+
 // Allows private MySql info to be saved seperately, and referenced below.
 require("dotenv").config();
 
 // A custom instance of Sequelize that has its own port along with personal login info.
-
 const sequelize = process.env.JAWSDB_URL
   ? new Sequelize(process.env.JAWSDB_URL)
   : new Sequelize(
