@@ -20,7 +20,7 @@ const addPostHandler = async (event) => {
     console.log("Response from server:", response);
 
     if (response.ok) {
-      console.log("Comment successfully added.");
+      console.log("Post successfully added.");
       document.location.replace("/");
     } else {
       console.log("Failed to add post. Status code:", response.status);

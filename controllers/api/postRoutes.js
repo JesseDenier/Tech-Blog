@@ -2,6 +2,41 @@ const router = require("express").Router();
 const { User, Post, Comment } = require("../../models");
 
 // This route creates a new post based on input from the user, and the current date.
+router.put("/editPost", async (req, res) => {
+  try {
+    // Extract post ID from req.body
+    const postId = req.body.id;
+
+    // Check if the post ID exists
+    if (!postId) {
+      return res.status(400).json({ error: "Post ID is required." });
+    }
+
+    // Find the post by ID
+    let postToUpdate = await Post.findByPk(postId);
+
+    // Check if the post exists
+    if (!postToUpdate) {
+      return res.status(404).json({ error: "Post not found." });
+    }
+
+    // Update the post with new content
+    postToUpdate.title = req.body.title || postToUpdate.title;
+    postToUpdate.content = req.body.content || postToUpdate.content;
+    postToUpdate.date = new Date(); // Update the date to current
+
+    // Save the updated post
+    await postToUpdate.save();
+
+    // Respond with the updated post data
+    res.status(200).json(postToUpdate);
+  } catch (err) {
+    // Handle errors
+    res.status(400).json(err);
+  }
+});
+
+// This route creates a new post based on input from the user, and the current date.
 router.post("/addPost", async (req, res) => {
   try {
     const newPost = {
