@@ -21,7 +21,7 @@ This project works by using a Model-View-Controller paradigm as the folder struc
 
 ## Installation
 
-No installation necessary. Simply visit https://jesse-denier-tech-blog-73c1337dfa54.herokuapp.com/.
+No installation necessary. Simply visit https://jesse-denier-tech-blog-ab13f8edac61.herokuapp.com/.
 
 ## Usage
 
