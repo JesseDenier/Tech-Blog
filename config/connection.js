@@ -5,8 +5,8 @@ require("dotenv").config();
 
 // A custom instance of Sequelize that has its own port along with personal login info.
 
-const sequelize = process.env.JAWSDB_MARIA_URL
-  ? new Sequelize(process.env.JAWSDB_MARIA_URL)
+const sequelize = process.env.JAWSDB_URL
+  ? new Sequelize(process.env.JAWSDB_URL)
   : new Sequelize(
       process.env.DB_NAME,
       process.env.DB_USER,
